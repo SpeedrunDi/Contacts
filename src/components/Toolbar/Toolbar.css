@@ -1,0 +1,23 @@
+.Toolbar {
+    min-height: 56px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #c7c7c7;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    box-sizing: border-box;
+    z-index: 90; /* Should be lower than backdrop */
+    box-shadow: 0 3px 15px black;
+}
+
+.Toolbar nav {
+    height: 100%;
+}
+
+.Toolbar-Logo {
+    height: 90%;
+}
