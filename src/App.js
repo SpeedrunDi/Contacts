@@ -10,6 +10,7 @@ const App = () => (
       <Route path="/" exact component={Contacts}/>
       <Route path="/new" component={AddNewContact}/>
       <Route path="/edit/:id" component={AddNewContact}/>
+      <Route render={() => <h1 style={{textAlign: "center", marginTop: "180px"}}>Not found!</h1>}/>
     </Switch>
   </Layout>
 );
