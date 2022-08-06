@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {actionModal, deleteContact, getContact, getContacts} from "../../store/contactsActions";
+import {actionModal, clearContact, deleteContact, getContact, getContacts} from "../../store/contactsActions";
 import ContactsCycle from "../../components/ContactsCycle/ContactsCycle";
 import Spinner from "../../components/UI/Spinner/Spinner";
 import FullContact from "../../components/FullContact/FullContact";
@@ -23,6 +23,7 @@ const Contacts = ({history}) => {
   };
 
   const onClosed = () => {
+    dispatch(clearContact());
     dispatch(actionModal(false));
   };
 
@@ -34,6 +35,7 @@ const Contacts = ({history}) => {
   const onDeleteContact = async id => {
     await dispatch(deleteContact(id));
     await dispatch(getContacts());
+    dispatch(clearContact());
     dispatch(actionModal(false));
   };
 

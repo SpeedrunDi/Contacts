@@ -73,6 +73,7 @@ export const addContact = contactData => {
       dispatch(addNewContactSuccess());
     } catch (e) {
       dispatch(addNewContactFailure(e.message));
+      throw e;
     }
   };
 };
@@ -107,12 +108,13 @@ export const deleteContact = id => {
 export const editContact = (id, contactData) => {
   return async dispatch => {
     try {
-      dispatch(deleteContactRequest());
+      dispatch(editContactRequest());
       await axios.patch('/contacts/' + id + '.json', contactData);
 
-      dispatch(deleteContactSuccess());
+      dispatch(editContactSuccess());
     } catch (e) {
-      dispatch(deleteContactFailure(e.message));
+      dispatch(editContactFailure(e.message));
+      throw e;
     }
   };
 };
