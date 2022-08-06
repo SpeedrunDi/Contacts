@@ -38,6 +38,7 @@
 
 .AddButtonsBlock {
     display: flex;
+    margin-top: 20px;
 }
 
 .AddButtonsBlock button {

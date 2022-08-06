@@ -1,14 +1,12 @@
-import React, {useState} from 'react';
-import {useDispatch} from "react-redux";
+import React, {useEffect, useState} from 'react';
+import {useDispatch, useSelector} from "react-redux";
 import Button from "../UI/Button/Button";
-import {addContact} from "../../store/contactsActions";
-import {useHistory} from "react-router-dom";
+import {addContact, clearContact, editContact} from "../../store/contactsActions";
 import './AddNewContact.css';
 
-const AddNewContact = () => {
+const AddNewContact = ({history, match}) => {
   const dispatch = useDispatch();
-
-  const history = useHistory();
+  const contact = useSelector(state => state.contact);
 
   const [newContact, setNewContact] = useState({
     name: '',
@@ -16,6 +14,14 @@ const AddNewContact = () => {
     email: '',
     img: '',
   });
+
+  useEffect(() => {
+    if (contact) {
+      delete contact.id;
+
+      setNewContact(contact);
+    }
+  }, [contact]);
 
   const onChange = (e) => {
     const {id, value} = e.target;
@@ -32,19 +38,25 @@ const AddNewContact = () => {
       return;
     }
 
-    await dispatch(addContact(newContact));
+    if (match.params.id) {
+      await dispatch(editContact(match.params.id, newContact));
+      dispatch(clearContact());
+    } else {
+      await dispatch(addContact(newContact));
+    }
 
     history.replace('/');
   };
 
   const backToContacts = () => {
+    if (match.params.id) dispatch(clearContact());
     history.push('/');
   }
 
   return (
     <div className="Container">
       <div className="AddBlockContact">
-        <h2 className="AddContactTitle">Add new contact</h2>
+        <h2 className="AddContactTitle">{match.params.id ? "Edit current contact" : "Add new contact"}</h2>
         <div className="InputsBlock">
           <div className="InputBlock">
             <label htmlFor="name">Name</label>
