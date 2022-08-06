@@ -1,0 +1,30 @@
+.Contact {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    max-width: 520px;
+    padding: 15px;
+    margin-bottom: 30px;
+    border: 3px solid black;
+}
+
+.ImgBlock {
+    width: 30%;
+}
+
+.ImgBlock img {
+    width: 90px;
+    height: 90px;
+    margin-left: 20px;
+}
+
+.NameBlock {
+    width: 70%;
+    padding: 0 20px;
+}
+
+.NameBlock p {
+    font-size: 26px;
+    font-weight: bold;
+    text-transform: capitalize;
+}
