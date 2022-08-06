@@ -1,0 +1,39 @@
+.FullContact {
+    display: flex;
+    padding: 20px;
+}
+
+.ContactImg {
+    width: 35%;
+    padding: 10px;
+}
+
+.ContactImg img {
+    width: 140px;
+    height: 140px;
+}
+
+.ContactDetails {
+    width: 65%;
+    padding: 10px;
+}
+
+.FullContactName {
+    font-size: 32px;
+    text-transform: capitalize;
+    margin-top: 0;
+}
+
+.ContactText {
+    font-size: 20px;
+}
+
+.ButtonsBlock {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.ButtonsBlock button:last-child {
+   margin-right: auto;
+   margin-left: 20px;
+}

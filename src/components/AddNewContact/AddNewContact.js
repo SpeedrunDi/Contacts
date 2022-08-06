@@ -2,10 +2,13 @@ import React, {useState} from 'react';
 import {useDispatch} from "react-redux";
 import Button from "../UI/Button/Button";
 import {addContact} from "../../store/contactsActions";
+import {useHistory} from "react-router-dom";
 import './AddNewContact.css';
 
 const AddNewContact = () => {
   const dispatch = useDispatch();
+
+  const history = useHistory();
 
   const [newContact, setNewContact] = useState({
     name: '',
@@ -23,14 +26,25 @@ const AddNewContact = () => {
     }));
   };
 
-  const saveContact = () => {
-    dispatch(addContact(newContact));
+  const saveContact = async () => {
+    if (newContact.name === '' || newContact.phone === '') {
+      alert('Enter a details in fields Name and Phone!');
+      return;
+    }
+
+    await dispatch(addContact(newContact));
+
+    history.replace('/');
   };
+
+  const backToContacts = () => {
+    history.push('/');
+  }
 
   return (
     <div className="Container">
       <div className="AddBlockContact">
-        <h2>Add new contact</h2>
+        <h2 className="AddContactTitle">Add new contact</h2>
         <div className="InputsBlock">
           <div className="InputBlock">
             <label htmlFor="name">Name</label>
@@ -48,13 +62,13 @@ const AddNewContact = () => {
             <label htmlFor="img">Photo</label>
             <input type="text" id="img" value={newContact.img} onChange={onChange}/>
           </div>
-          <div>
+          <div className="imgPreview">
             <p>Photo preview</p>
-            <img src={newContact.img} alt="" className="Img"/>
+            <img src={newContact.img} alt=""/>
           </div>
           <div className="AddButtonsBlock">
             <Button type="submit" onClick={saveContact}>Save</Button>
-            <Button type="button" btnType="danger">Back</Button>
+            <Button type="button" btnType="danger" onClick={backToContacts}>Back to contacts</Button>
           </div>
         </div>
       </div>

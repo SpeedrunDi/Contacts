@@ -1,7 +1,8 @@
 import {
+  ACTION_MODAL,
   ADD_NEW_CONTACT_FAILURE,
   ADD_NEW_CONTACT_REQUEST,
-  ADD_NEW_CONTACT_SUCCESS,
+  ADD_NEW_CONTACT_SUCCESS, GET_CONTACT_FAILURE, GET_CONTACT_REQUEST, GET_CONTACT_SUCCESS,
   GET_CONTACTS_FAILURE,
   GET_CONTACTS_REQUEST,
   GET_CONTACTS_SUCCESS
@@ -9,6 +10,7 @@ import {
 
 const initialState = {
   contacts: null,
+  contact: null,
   loading: false,
   error: null,
   show: false,
@@ -16,6 +18,8 @@ const initialState = {
 
 const contactsReducer = (state = initialState, action) => {
   switch (action.type) {
+    case ACTION_MODAL:
+      return {...state, show: action.payload};
     case GET_CONTACTS_REQUEST:
       return {...state, loading: true, error: null};
     case GET_CONTACTS_SUCCESS:
@@ -27,6 +31,12 @@ const contactsReducer = (state = initialState, action) => {
     case ADD_NEW_CONTACT_SUCCESS:
       return {...state, loading: false};
     case ADD_NEW_CONTACT_FAILURE:
+      return {...state, loading: false, error: action.payload};
+    case GET_CONTACT_REQUEST:
+      return {...state, loading: true, error: null};
+    case GET_CONTACT_SUCCESS:
+      return {...state, loading: false, contact: action.payload};
+    case GET_CONTACT_FAILURE:
       return {...state, loading: false, error: action.payload};
     default:
       return state;

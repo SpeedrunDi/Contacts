@@ -1,8 +1,45 @@
 .AddBlockContact {
     width: max-content;
+    margin: 0 auto;
+    padding-top: 50px;
 }
 
-.Img {
+.AddContactTitle {
+    font-size: 32px;
+    text-align: center;
+}
+
+.InputBlock {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.InputBlock label {
+    width: 40%;
+}
+
+.InputBlock input {
+    width: 60%;
+    padding: 2px 5px;
+}
+
+.imgPreview {
+    display: flex;
+}
+
+.imgPreview p {
+    width: 40%;
+}
+
+.imgPreview img {
     width: 90px;
     height: 90px;
+}
+
+.AddButtonsBlock {
+    display: flex;
+}
+
+.AddButtonsBlock button {
+    margin: 10px 20px;
 }

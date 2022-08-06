@@ -10,7 +10,6 @@ const Toolbar = () => {
     history.push('/new');
   };
 
-  console.log('Render');
   return (
     <header className="Toolbar">
       <div className="Toolbar-Logo">
