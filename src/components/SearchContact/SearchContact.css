@@ -1,0 +1,13 @@
+.Search-Block {
+    margin: 130px auto 0;
+    max-width: 520px;
+}
+
+.Search-Block input {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    width: 93%;
+    font-size: 20px;
+    background-color: #f1f1f1;
+}
