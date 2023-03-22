@@ -21,3 +21,13 @@
 .Toolbar-Logo {
     height: 90%;
 }
+
+@media screen and (max-width: 720px){
+    .Toolbar-Logo {
+        font-size: 12px;
+    }
+
+    .Toolbar button {
+        font-size: 10px;
+    }
+}

@@ -9,17 +9,15 @@ import './Contacts.css';
 const Contacts = ({history}) => {
   const dispatch = useDispatch();
   const contacts = useSelector(state => state.contacts);
-  const contact = useSelector(state => state.contact);
   const loading = useSelector(state => state.loading);
-  const show = useSelector(state => state.show);
 
   useEffect(() => {
     dispatch(getContacts());
   }, [dispatch]);
 
   const onGetFullData = async id => {
-    await dispatch(getContact(id));
     dispatch(actionModal(true));
+    await dispatch(getContact(id));
   };
 
   const onClosed = () => {
@@ -46,15 +44,11 @@ const Contacts = ({history}) => {
 
   return (
     <div className="Container">
-      {contact &&
-        <FullContact show={show}
-                     loading={loading}
-                     contact={contact}
-                     onClosed={onClosed}
-                     onEdit={onEditContact}
-                     onDelete={onDeleteContact}
-        />
-      }
+      <FullContact
+        onClosed={onClosed}
+        onEdit={onEditContact}
+        onDelete={onDeleteContact}
+      />
       <div className="Contacts">
         {loader}
       </div>

@@ -18,6 +18,7 @@ const initialState = {
   contacts: null,
   contact: null,
   loading: false,
+  contactLoading: false,
   error: null,
   show: false,
 };
@@ -41,11 +42,11 @@ const contactsReducer = (state = initialState, action) => {
     case ADD_NEW_CONTACT_FAILURE:
       return {...state, loading: false, error: action.payload};
     case GET_CONTACT_REQUEST:
-      return {...state, loading: true, error: null};
+      return {...state, contactLoading: true, error: null};
     case GET_CONTACT_SUCCESS:
-      return {...state, loading: false, contact: action.payload};
+      return {...state, contactLoading: false, contact: action.payload};
     case GET_CONTACT_FAILURE:
-      return {...state, loading: false, error: action.payload};
+      return {...state, contactLoading: false, error: action.payload};
     case DELETE_CONTACT_REQUEST:
       return {...state, loading: true, error: null};
     case DELETE_CONTACT_SUCCESS:

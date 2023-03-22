@@ -55,6 +55,8 @@ export const getContacts = () => {
       let newData = data;
       if (data) {
         newData = Object.keys(data).map(key => ({name: data[key].name, img: data[key].img, id: key}));
+
+        newData.sort((a, b) => a.name.localeCompare(b.name))
       }
 
       dispatch(getContactsSuccess(newData));

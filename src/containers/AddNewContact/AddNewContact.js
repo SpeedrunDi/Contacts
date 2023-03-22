@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import Button from "../UI/Button/Button";
+import Button from "../../components/UI/Button/Button";
 import {addContact, clearContact, editContact, getContact} from "../../store/contactsActions";
-import Spinner from "../UI/Spinner/Spinner";
+import Spinner from "../../components/UI/Spinner/Spinner";
 import './AddNewContact.css';
 
 const AddNewContact = ({history, match}) => {
@@ -18,6 +18,16 @@ const AddNewContact = ({history, match}) => {
   });
 
   useEffect(() => {
+    if (match.path.includes('new')) {
+      dispatch(clearContact())
+      setNewContact({
+        name: '',
+        phone: '',
+        email: '',
+        img: '',
+      })
+    }
+
     if (contact) {
       delete contact.id;
 
@@ -26,6 +36,12 @@ const AddNewContact = ({history, match}) => {
       dispatch(getContact(match.params.id));
     }
   }, [contact, dispatch, match, history]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(clearContact());
+    };
+  }, [dispatch]);
 
   const onChange = (e) => {
     const {id, value} = e.target;
@@ -44,7 +60,6 @@ const AddNewContact = ({history, match}) => {
 
     if (match.params.id) {
       await dispatch(editContact(match.params.id, newContact));
-      dispatch(clearContact());
     } else {
       await dispatch(addContact(newContact));
     }
@@ -53,9 +68,8 @@ const AddNewContact = ({history, match}) => {
   };
 
   const backToContacts = () => {
-    if (match.params.id) dispatch(clearContact());
     history.push('/');
-  }
+  };
 
   let loader = (
     <>
@@ -77,10 +91,14 @@ const AddNewContact = ({history, match}) => {
           <label htmlFor="img">Photo</label>
           <input type="text" id="img" value={newContact.img} onChange={onChange}/>
         </div>
-        <div className="imgPreview">
-          <p>Photo preview</p>
-          <img src={newContact.img} alt=""/>
-        </div>
+        {
+          newContact.img && (
+            <div className="imgPreview">
+              <p>Photo preview</p>
+              <img src={newContact.img} alt=""/>
+            </div>
+          )
+        }
         <div className="AddButtonsBlock">
           <Button type="submit" onClick={saveContact}>Save</Button>
           <Button type="button" btnType="danger" onClick={backToContacts}>Back to contacts</Button>
@@ -88,6 +106,7 @@ const AddNewContact = ({history, match}) => {
       </div>
     </>
   );
+
   if (loading) {
     loader = <Spinner/>;
   }
